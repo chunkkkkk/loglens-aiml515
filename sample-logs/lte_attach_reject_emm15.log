@@ -1,0 +1,32 @@
+=== Spirent Test Session ===
+Station: QA-RACK-07  Script: LTE_NAS_Attach_Basic.py  Tool: CMW-style emulator v12.4
+Test Case: TC_LTE_NAS_0112  Band: B4  EARFCN: 2175  PLMN: 001-01
+Device: Pixel test unit  ro.serialno=9A231FFAZ00412  IMEI: 356938035643809  IMSI: 001010123456789
+MSISDN: +14255550142
+2026-10-04 21:02:10.112 [TESTER] Power on cell 1 (PCI 101), RS EPRE -85 dBm/15kHz
+2026-10-04 21:02:12.004 [ADB] adb shell cmd connectivity airplane-mode disable
+2026-10-04 21:02:12.530 [UE-LOG] ML1: Cell search started, EARFCN 2175
+2026-10-04 21:02:13.101 [UE-LOG] ML1: Cell acquired PCI 101 RSRP -84.6 dBm RSRQ -9.1 dB
+2026-10-04 21:02:13.220 [UE-LOG] RRC: SIB1 decoded, TAC 0x0001, cellBarred=notBarred
+2026-10-04 21:02:13.410 [UE-LOG] RRC: SIB2 decoded, T300=ms1000, T310=ms1000, N310=n1
+2026-10-04 21:02:13.612 [UE-LOG] MAC: RACH preamble sent, index 23, power -104 dBm
+2026-10-04 21:02:13.640 [UE-LOG] MAC: RAR received, TA 3, TC-RNTI 0x4601
+2026-10-04 21:02:13.655 [UE-LOG] RRC UL-CCCH: RRCConnectionRequest cause=mo-Signalling
+2026-10-04 21:02:13.690 [UE-LOG] RRC DL-CCCH: RRCConnectionSetup
+2026-10-04 21:02:13.702 [UE-LOG] RRC UL-DCCH: RRCConnectionSetupComplete (ATTACH REQUEST, PDN CONNECTIVITY REQUEST)
+2026-10-04 21:02:13.705 [UE-LOG] NAS EMM: ATTACH REQUEST type=EPS attach, identity=IMSI 001010123456789
+2026-10-04 21:02:13.850 [TESTER] NAS: Authentication Request sent
+2026-10-04 21:02:13.910 [UE-LOG] NAS EMM: AUTHENTICATION RESPONSE
+2026-10-04 21:02:13.990 [TESTER] NAS: Security Mode Command (EEA2/EIA2)
+2026-10-04 21:02:14.020 [UE-LOG] NAS EMM: SECURITY MODE COMPLETE
+2026-10-04 21:02:14.330 [TESTER] NAS: Sending ATTACH REJECT, EMM cause #15 (No suitable cells in tracking area)
+2026-10-04 21:02:14.341 [UE-LOG] NAS EMM: ATTACH REJECT received, EMM cause #15 (No suitable cells in tracking area)
+2026-10-04 21:02:14.342 [UE-LOG] NAS EMM: Adding TAI 001-01-0x0001 to forbidden TAs for roaming list
+2026-10-04 21:02:14.360 [UE-LOG] RRC: RRCConnectionRelease received
+2026-10-04 21:02:14.900 [UE-LOG] ML1: Cell search started, EARFCN 2175
+2026-10-04 21:02:15.400 [UE-LOG] RRC: Cell PCI 101 skipped (TA in forbidden list)
+2026-10-04 21:02:44.401 [TESTER] Expected: UE shall attempt cell selection on another TA and not retry PCI 101 within T3402
+2026-10-04 21:02:44.402 [TESTER] Observed: UE stayed in EMM-DEREGISTERED.LIMITED-SERVICE, no further attach attempt
+2026-10-04 21:02:44.410 [TESTER] Step 7 check: second cell (PCI 202, TAC 0x0002) was NOT powered on by script config
+2026-10-04 21:02:44.500 [TESTER] VERDICT: FAIL  (Step 7: UE did not register on alternate TA within 30 s)
+=== End of session ===

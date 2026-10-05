@@ -1,0 +1,13 @@
+=== Nightly Regression Batch 2026-10-04 ===
+Station: QA-RACK-11  Script: LTE_VoLTE_MO_Call.py  Test Case: TC_IMS_VOLTE_0021
+2026-10-04 23:40:00.001 [RUNNER] Preparing DUT, adb serial 33141FDJH00095
+2026-10-04 23:40:00.420 [ADB] adb -s 33141FDJH00095 shell getprop ro.build.fingerprint
+2026-10-04 23:40:03.421 [ADB] error: device '33141FDJH00095' not found
+2026-10-04 23:40:03.500 [RUNNER] Retry 1/3: adb reconnect
+2026-10-04 23:40:08.512 [ADB] adb devices -> 33141FDJH00095  offline
+2026-10-04 23:40:08.600 [RUNNER] Retry 2/3: adb kill-server && adb start-server
+2026-10-04 23:40:14.010 [ADB] adb devices -> 33141FDJH00095  offline
+2026-10-04 23:40:14.100 [RUNNER] Retry 3/3 failed
+2026-10-04 23:40:14.120 [RUNNER] USB hub port 4 reported over-current event at 23:39:58
+2026-10-04 23:40:14.200 [RUNNER] Test could not start: DUT unreachable over ADB
+2026-10-04 23:40:14.210 [RUNNER] VERDICT: FAIL (setup) - test steps not executed

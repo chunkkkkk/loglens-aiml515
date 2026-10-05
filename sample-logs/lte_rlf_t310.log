@@ -1,0 +1,18 @@
+=== Test Session: LTE Connected Mode Robustness ===
+Station: QA-RACK-05  Script: LTE_RLF_Recovery.py  Test Case: TC_LTE_RRM_0217
+Device IMEI: 490154203237518  IMSI: 310260000000123
+2026-10-04 20:05:00.000 [TESTER] Cell 1 PCI 12 B2 RS EPRE -85 dBm, iperf DL 50 Mbps started
+2026-10-04 20:05:05.100 [UE-LOG] RRC: RRCConnectionReconfiguration, measConfig A3 offset 3 dB
+2026-10-04 20:05:10.000 [TESTER] Step 3: drop Cell 1 to -128 dBm (below S-criteria) for 3 s
+2026-10-04 20:05:10.420 [UE-LOG] ML1: RSRP -126.9 dBm SINR -8.5 dB, out-of-sync indication 1
+2026-10-04 20:05:10.620 [UE-LOG] ML1: out-of-sync indication N310 reached, T310 started (1000 ms)
+2026-10-04 20:05:11.620 [UE-LOG] RRC: T310 expiry -> Radio Link Failure detected
+2026-10-04 20:05:11.621 [UE-LOG] RRC: Starting T311, cell selection for re-establishment
+2026-10-04 20:05:13.000 [TESTER] Step 4: restore Cell 1 to -85 dBm
+2026-10-04 20:05:13.410 [UE-LOG] RRC: RRCConnectionReestablishmentRequest cause=otherFailure
+2026-10-04 20:05:13.470 [UE-LOG] RRC: RRCConnectionReestablishmentReject
+2026-10-04 20:05:13.480 [UE-LOG] RRC: Going to RRC_IDLE, will perform NAS recovery (TAU)
+2026-10-04 20:05:13.900 [UE-LOG] NAS EMM: TRACKING AREA UPDATE REQUEST
+2026-10-04 20:05:14.300 [UE-LOG] NAS EMM: TRACKING AREA UPDATE ACCEPT
+2026-10-04 20:05:20.000 [TESTER] iperf DL resumed at 49.2 Mbps after 8.9 s interruption
+2026-10-04 20:05:20.010 [TESTER] VERDICT: FAIL (Step 5: data interruption 8.9 s exceeds 5 s limit)

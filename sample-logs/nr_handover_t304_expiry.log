@@ -1,0 +1,21 @@
+=== Test Session: NR SA Mobility ===
+Station: QA-RACK-03  Script: NR_SA_InterFreq_HO.py  Test Case: TC_NR_MOB_0430
+Band: n77 -> n78   SCS 30 kHz   Device IMEI 352099001761481   adb serial R5CT20ABCDE
+2026-10-04 22:14:01.000 [TESTER] Cell 1 PCI 300 (n77, ARFCN 650016) SS-RSRP -80 dBm
+2026-10-04 22:14:01.010 [TESTER] Cell 2 PCI 401 (n78, ARFCN 636666) SS-RSRP -110 dBm
+2026-10-04 22:14:05.300 [UE-LOG] NR5G RRC: RRCSetupComplete, 5GMM REGISTRATION REQUEST
+2026-10-04 22:14:05.900 [UE-LOG] NR5G NAS: REGISTRATION ACCEPT, 5G-GUTI assigned
+2026-10-04 22:14:06.120 [UE-LOG] NR5G NAS: PDU SESSION ESTABLISHMENT ACCEPT, PSI 1, DNN internet
+2026-10-04 22:14:10.000 [TESTER] Step 4: ramp Cell 2 to -75 dBm, Cell 1 to -100 dBm over 5 s
+2026-10-04 22:14:12.410 [UE-LOG] NR5G RRC: MeasurementReport measId=2 event A3, PCI 401 RSRP -86 dBm, serving -97 dBm
+2026-10-04 22:14:12.480 [UE-LOG] NR5G RRC: RRCReconfiguration with reconfigurationWithSync, targetPCI 401, t304=ms100
+2026-10-04 22:14:12.481 [UE-LOG] NR5G ML1: Start RACH on target PCI 401, preamble 12 (CFRA)
+2026-10-04 22:14:12.512 [UE-LOG] NR5G MAC: RAR not received in window (attempt 1)
+2026-10-04 22:14:12.540 [UE-LOG] NR5G MAC: RAR not received in window (attempt 2), power ramp +2 dB
+2026-10-04 22:14:12.569 [UE-LOG] NR5G MAC: RAR not received in window (attempt 3), power ramp +2 dB
+2026-10-04 22:14:12.581 [UE-LOG] NR5G RRC: T304 expiry, reconfiguration with sync failure
+2026-10-04 22:14:12.582 [UE-LOG] NR5G RRC: Handover failure to PCI 401, initiating RRCReestablishment (cause handoverFailure)
+2026-10-04 22:14:12.700 [UE-LOG] NR5G RRC: RRCReestablishmentRequest on PCI 300
+2026-10-04 22:14:12.760 [UE-LOG] NR5G RRC: RRCReestablishment received
+2026-10-04 22:14:13.900 [TESTER] Note: target cell PRACH config index 160, UE used occasion for config index 159 (mismatch logged by emulator)
+2026-10-04 22:14:20.000 [TESTER] VERDICT: FAIL (Step 5: UE not on PCI 401 within 2 s after HO command)
