@@ -7,10 +7,10 @@ const MAX_MB = 2;
 const FIELD_RE = /^[\w .:/#()+-]*$/;
 
 const SAMPLE_META = {
-  'lte_attach_reject_emm15.log': { testCaseId: 'TC_LTE_NAS_0112', build: 'AP3A.261005.001', device: 'Pixel test unit' },
-  'nr_handover_t304_expiry.log': { testCaseId: 'TC_NR_MOB_0430', build: 'AP3A.261005.001', device: 'Pixel test unit' },
-  'adb_offline_setup_error.log': { testCaseId: 'TC_IMS_VOLTE_0021', build: 'AP3A.261005.001', device: 'Pixel test unit' },
-  'lte_rlf_t310.log': { testCaseId: 'TC_LTE_RRM_0217', build: 'AP3A.260928.002', device: 'Pixel test unit' },
+  'lte_attach_reject_emm15.log': { testCaseId: 'TC_LTE_NAS_0112', build: 'X7KQ2-9PZ4M', device: 'Pixel test unit' },
+  'nr_handover_t304_expiry.log': { testCaseId: 'TC_NR_MOB_0430', build: 'X7KQ2-9PZ4M', device: 'Pixel test unit' },
+  'adb_offline_setup_error.log': { testCaseId: 'TC_IMS_VOLTE_0021', build: 'R3T8W-LQ61V', device: 'Pixel test unit' },
+  'lte_rlf_t310.log': { testCaseId: 'TC_LTE_RRM_0217', build: 'N5JD0-HC27Y', device: 'Pixel test unit' },
 };
 
 function validate(form, file) {
@@ -116,7 +116,7 @@ export default function TriagePage({ health }) {
 
             <div className="grid gap-4 sm:grid-cols-3">
               <Field id="testCaseId" label="Test case ID *" value={form.testCaseId} onChange={update('testCaseId')} error={errors.testCaseId} placeholder="TC_LTE_NAS_0112" />
-              <Field id="build" label="Build *" value={form.build} onChange={update('build')} error={errors.build} placeholder="AP3A.261005.001" />
+              <Field id="build" label="Build *" value={form.build} onChange={update('build')} error={errors.build} placeholder="X7KQ2-9PZ4M" />
               <Field id="device" label="Device" value={form.device} onChange={update('device')} error={errors.device} placeholder="Pixel test unit" />
             </div>
 

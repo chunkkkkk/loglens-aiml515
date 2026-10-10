@@ -2,5 +2,14 @@ node_modules/
 .env
 server/data/*.db
 server/data/*.db-*
-client/dist/
 .DS_Store
+deploy/
+# Course deliverables and local-only files (not source code)
+video/
+*.pdf
+LogLens_Screenshot*.png
+client/public/_xfer/
+server/data/
+*.command.log
+
+# client/dist is committed on purpose so AWS CodePipeline can deploy the repo directly to Elastic Beanstalk.

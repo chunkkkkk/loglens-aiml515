@@ -10,6 +10,7 @@ import logsRouter from './routes/logs.js';
 import { stats } from './db.js';
 import { aiMode } from './services/aiAnalyzer.js';
 import { CATEGORIES, CATEGORY_LABELS } from './services/schema.js';
+import { rateLimit } from './rateLimit.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SAMPLES_DIR = path.join(__dirname, '..', '..', 'sample-logs');
@@ -17,12 +18,18 @@ const CLIENT_DIST = path.join(__dirname, '..', '..', 'client', 'dist');
 
 const app = express();
 app.disable('x-powered-by');
-app.use(helmet());
+// Behind the AWS load balancer / nginx proxy, trust the first proxy so client IPs are correct.
+app.set('trust proxy', 1);
+// The AWS URL is plain HTTP, so do not force browsers to upgrade requests to HTTPS.
+app.use(helmet({
+  contentSecurityPolicy: { directives: { upgradeInsecureRequests: null } },
+  strictTransportSecurity: false,
+}));
 app.use(cors({ origin: [/^http:\/\/localhost:\d+$/, /^http:\/\/127\.0\.0\.1:\d+$/] }));
 app.use(express.json({ limit: '100kb' }));
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', aiMode: aiMode(), model: aiMode() === 'claude' ? (process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-5') : null });
+  res.json({ status: 'ok', aiMode: aiMode(), model: aiMode() === 'claude' ? (process.env.ANTHROPIC_MODEL || 'claude-sonnet-5-5') : null });
 });
 
 app.get('/api/meta', (req, res) => {
@@ -42,6 +49,8 @@ app.get('/api/samples/:name', (req, res) => {
   res.type('text/plain').send(fs.readFileSync(path.join(SAMPLES_DIR, req.params.name), 'utf8'));
 });
 
+// Limit AI analyses per visitor so a public URL cannot run up API costs.
+app.post('/api/logs', rateLimit({ windowMs: 60 * 60 * 1000, max: Number(process.env.RATE_LIMIT_PER_HOUR || 20) }));
 app.use('/api/logs', logsRouter);
 app.use('/api', (req, res) => res.status(404).json({ error: 'Not found.' }));
 

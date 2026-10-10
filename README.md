@@ -20,7 +20,7 @@ If no API key is set, or the AI call fails, LogLens falls back to a built-in **r
 | Backend | Node.js, Express 4, Multer (uploads), Zod (validation), Helmet |
 | Database | SQLite via better-sqlite3 (local); PostgreSQL / RDS planned for production |
 | AI | Anthropic Claude API with tool use for structured JSON output |
-| Deploy target | Docker container on AWS App Runner (Workshop 6) |
+| Hosting | AWS Elastic Beanstalk, Node.js 22 on Amazon Linux 2023 (App Runner is closed to new customers) |
 
 ## Project structure
 
@@ -61,6 +61,19 @@ npm run dev
 Open http://localhost:5173. The header shows **Claude AI connected** when the key is loaded, or **Rules mode** without one.
 
 Run the unit tests with `npm test`.
+
+## Live demo
+
+http://loglens-aiml515.us-east-1.elasticbeanstalk.com/
+
+## Deploying to AWS Elastic Beanstalk
+
+1. Run `prepare-deploy.command` (macOS) or `npm run build` and zip `server/`, `client/dist/`, `sample-logs/` with a root `package.json` whose start script is `node server/src/index.js`. The script writes `deploy/loglens-eb-*.zip`.
+2. In the Elastic Beanstalk console, create a Node.js 22 web server environment (single instance, t3.micro) and upload the zip.
+3. Set environment properties: `NODE_ENV=production`, `ANTHROPIC_MODEL=claude-sonnet-5-5`, and `ANTHROPIC_API_KEY` (never commit the key).
+4. To release a new version, upload a new zip with **Upload and deploy**.
+
+Production hardening: per-IP rate limit on analyses (`RATE_LIMIT_PER_HOUR`, default 20), Helmet headers configured for an HTTP endpoint, and `trust proxy` for the Elastic Beanstalk proxy.
 
 ## API
 
