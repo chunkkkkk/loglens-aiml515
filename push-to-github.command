@@ -25,7 +25,7 @@ if git diff --cached --name-only | grep -E '(^|/)\.env$|ai-errors\.log|\.db$'; t
 fi
 # Fix the author email of the earlier local commit if it was made with an email instead of a username.
 if git log -1 --format=%ae | grep -q '@.*@'; then git -c user.name="Chun Kit Kwong" -c user.email="${GHUSER}@users.noreply.github.com" commit -q --amend --no-edit --reset-author; fi
-git -c user.name="Chun Kit Kwong" -c user.email="${GHUSER}@users.noreply.github.com" commit -q -m "Prepare LogLens for AWS Elastic Beanstalk: rate limit, HTTP-safe headers, deploy script, docs" || echo "(nothing new to commit)"
+git -c user.name="Chun Kit Kwong" -c user.email="${GHUSER}@users.noreply.github.com" commit -q -m "Docs: document CodePipeline continuous deployment from GitHub to Elastic Beanstalk" || echo "(nothing new to commit)"
 git log --oneline | head -5
 
 echo "== Creating repository $GHUSER/$REPO"

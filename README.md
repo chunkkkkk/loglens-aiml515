@@ -71,7 +71,7 @@ http://loglens-aiml515.us-east-1.elasticbeanstalk.com/
 1. Run `prepare-deploy.command` (macOS) or `npm run build` and zip `server/`, `client/dist/`, `sample-logs/` with a root `package.json` whose start script is `node server/src/index.js`. The script writes `deploy/loglens-eb-*.zip`.
 2. In the Elastic Beanstalk console, create a Node.js 22 web server environment (single instance, t3.micro) and upload the zip.
 3. Set environment properties: `NODE_ENV=production`, `ANTHROPIC_MODEL=claude-sonnet-5-5`, and `ANTHROPIC_API_KEY` (never commit the key).
-4. To release a new version, upload a new zip with **Upload and deploy**.
+4. **Continuous deployment (current setup):** AWS CodePipeline `loglens-aiml515-pipeline` watches the `main` branch of this repository through a GitHub App connection. Every `git push` to `main` automatically creates a new application version and deploys it to `loglens-aiml515-env` (no build stage, because `client/dist/` is committed). Manual zip upload is only a fallback.
 
 Production hardening: per-IP rate limit on analyses (`RATE_LIMIT_PER_HOUR`, default 20), Helmet headers configured for an HTTP endpoint, and `trust proxy` for the Elastic Beanstalk proxy.
 
